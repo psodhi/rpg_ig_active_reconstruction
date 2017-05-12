@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/flying_stereo_cam</robotNamespace>
+    </plugin>
+  </gazebo>
+  
+  <gazebo>
+    <static>true</static>
+  </gazebo>
+  
+  <gazebo reference="camera">
+    <sensor type="depth" name="depth_camera">       
+      <update_rate>30.0</update_rate>
+      <always_on>1</always_on>
+      <camera name="kinect">
+    <horizontal_fov>1.047</horizontal_fov>
+    <image>
+      <width>640</width>
+      <height>480</height>
+      <format>R8G8B8</format>
+    </image>
+                <depth_camera>
+
+            </depth_camera>
+    <clip>
+      <near>0.1</near>
+      <far>100</far>
+    </clip>
+      </camera>
+
+  <plugin name="stereo_camera_controller" filename="libgazebo_ros_openni_kinect.so">
+    <baseline>0.2</baseline>
+    <alwaysOn>true</alwaysOn>
+    <updateRate>0.0</updateRate>
+    <cameraName>camera</cameraName>
+    <imageTopicName>image_raw</imageTopicName>
+    <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+    <depthImageTopicName>depth/image_raw</depthImageTopicName>
+    <depthImageInfoTopicName>depth/camera_info</depthImageInfoTopicName>
+    <pointCloudTopicName>depth/points</pointCloudTopicName>
+    <frameName>cam_pos</frameName>
+    <pointCloudCutoff>0.5</pointCloudCutoff>
+    <distortionK1>0.0000000</distortionK1>
+    <distortionK2>0.0000000</distortionK2>
+    <distortionK3>0.0000000</distortionK3>
+    <distortionT1>0.0000000</distortionT1>
+    <distortionT2>0.0000000</distortionT2>
+    <CxPrime>0</CxPrime>
+    <Cx>0</Cx>
+    <Cy>0</Cy>
+    <focalLength>0</focalLength>
+    <hackBaseline>0</hackBaseline>
+  </plugin>
+  
+    </sensor>
+  </gazebo>
+</robot>
